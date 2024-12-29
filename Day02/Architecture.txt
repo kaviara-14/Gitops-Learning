@@ -1,0 +1,20 @@
+they try to manintain the state betweeen git and kubernetes.whatever there in the
+git it's a single source of truth..it takes those manifests file
+and deploy to kubernetes.
+
+After deploying, they continously monitor the git and kubernetes.
+
+ArgoCD Architecutre
+
+1. Repo server - Repo server will connect to the git and get the state.
+
+2. Application Controller - Application Controller is talking to the kubernetes and get the state
+And always compare the state betweeen git and kubernetes. If it is not same this Application Controller it will sync those changes to kubernetes according to manifests.
+
+3. API server - user will talk to the ArgoCD using either UI/CLI
+
+4. Redis - using redis we will caching the information, let say Application Controller is going down..once its comes back..it needs to have the information wht has happend..
+it will get those changes it did using redis.
+it's a stateful set.
+
+5. DEX server for oidc capabilites - authentication

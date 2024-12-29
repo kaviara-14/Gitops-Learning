@@ -1,0 +1,29 @@
+1. multi-cluster deployment.
+
+
+gitops is the modern way of implementing continuous deployment.
+
+let say i have 5 clusters(enivornment) dev,prod,uat,qa,stagging..all are using v1..
+
+now i want to update only dev,stagging, qa..to v2 
+how to update only those cluster
+
+
+using argocd we will devlop into 3 clusters
+
+we will install argocd in one of the cluster -- from these cluster we will
+deploy the changes into multi-cluster
+
+this is hub-spoke model
+
+in the legacy platform - we can't keep track the changes..
+will not able to capable of keep track any maual changes..
+
+
+standalone - for every cluster..we have argocd controller..
+if we are doing any upgrades..it will be hard..
+
+hubspoke - we have centralized argocd controller with we can connect
+to the multi cluster and deploy the changes
+we need to set this as high availability...
+or load will be huge

@@ -1,0 +1,12 @@
+Gitops
+
+Gitops uses git as a single source of truth to deliver application and infrastructure
+
+* Argocd controller keep track the Yaml manifests in the github, whenever a change happens
+in the yaml manifests it will take those changes deploy into kubernetes cluster.
+* Let say if some is login into one of the pod and deleting, argocd will override
+those changes and whatever the configurations in the github it will bring back.
+* Argocd controller always make sure the desired state is always there in kubernetes controller.
+
+* with these we  have security, versioning(keep track changes), auto healing if something went wrong and
+continous reconciliation

@@ -1,0 +1,93 @@
+1. we will write jobs in gitlab - we will have multiple jobs
+
+Build:
+    script:
+        - pip install node
+
+Deploy :
+    script:
+        - node app.js
+
+
+
+2. i want to execute the build first, after that only i need to execute the 2nd..we can use stages
+
+stages :
+    - build_job
+    - deploy_job
+
+Build
+    script: build_job
+    script :
+       - pip install python
+
+
+Deploy 
+    script: deploy_job
+    script:
+       - node app.js
+
+
+3. Job's don't share information between each other
+artifcats will be helpful to transferring the dependecies, report from one job to another
+
+stages:
+    build_job
+    deploy_job
+
+Build:
+    stages: build_job
+    script:
+        - pip install python
+
+    artifcats:
+        paths:
+            package-lock.json
+            node modules
+
+Deploy :
+    stages: deploy_job
+    script:
+        node app.js 
+
+4. defaultly ruby image - we can change the image using image tag.
+
+Build :
+    image: node
+    script:
+        pip install node
+
+5. execute the job in the background 
+
+Deploy :
+    script:
+        node app.js > /dev/null 2>&1 &
+
+6. Runners :
+    Gitlab Runners are the processes that pick up and execute the cicd jobs for 
+    gitlabs 
+    * shared Runners
+    * self-managed Runners 
+
+7. we create a tag, so that it will be run on that particular runner .
+
+tags :
+    -ec2
+    -server
+
+8. I created my owner runner for one my hands-on..
+
+    * i automated the dockerize a python application using gitlab cicd
+    * created my own runner : i registered my gitlab runner on ec2 instance...and configured to gitlab cicd pipeline with tags..
+    * i run the job using own runner..
+
+9. variables in gitlab cicd
+
+ * pre-defined variable
+ * custom variable - key value pair .
+ * secret variable
+    - job_name = it will get the job 
+
+10. schedule a pipeline - for every 1 defaultly
+
+11. different environment
